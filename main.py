@@ -14,9 +14,8 @@ class SpoiledBot(discord.Client):
         super().__init__(intents=self.__load_intents())
 
     @staticmethod
-    def __load_intents() -> None:
+    def __load_intents() -> discord.Intents:
         intents = discord.Intents().default()
-        intents.messages = True
         intents.message_content = True
         return intents
 
