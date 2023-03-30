@@ -11,10 +11,14 @@ import os
 
 class SpoiledBot(discord.Client):
     def __init__(self):
-        intents = discord.Intents()
-        intents.messages = True;
-        intents.message_content = True;
-        super().__init__(intents=intents)
+        super().__init__(intents=self.__load_intents())
+
+    @staticmethod
+    def __load_intents():
+        intents = discord.Intents().default()
+        intents.messages = True
+        intents.message_content = True
+        return intents
 
     async def on_ready(self):
         print('We have logged in as {0.user}'.format(self))
