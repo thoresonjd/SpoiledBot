@@ -24,8 +24,8 @@ class Level(Enum):
 class SpoiledBot(discord.Client):
     def __init__(self) -> None:
         super().__init__(intents=self.__load_intents())
-        self.mode = Mode.INVERT
-        self.level = Level.AGONY
+        self.mode = Mode.UNSPOIL
+        self.level = Level.NORMAL
 
     @staticmethod
     def __load_intents() -> discord.Intents:
@@ -37,7 +37,7 @@ class SpoiledBot(discord.Client):
         print('We have logged in as {0.user}'.format(self))
 
     async def on_message(self, message: discord.Message) -> None:
-        if message.author == self.user:
+        if self.mode == Mode.OFF or message.author == self.user:
             return
         elif message.channel == self.get_channel(message.channel.id) and message.webhook_id == None:
             webhook = await message.channel.create_webhook(name='delete')
@@ -51,8 +51,6 @@ class SpoiledBot(discord.Client):
 
     def execute(self, message: str) -> str:
         match self.mode:
-            case Mode.OFF:
-                return message
             case Mode.SPOIL:
                 return self.spoil(message)
             case Mode.UNSPOIL:
