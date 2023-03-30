@@ -10,27 +10,27 @@ import discord
 import os
 
 class SpoiledBot(discord.Client):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__(intents=self.__load_intents())
 
     @staticmethod
-    def __load_intents():
+    def __load_intents() -> None:
         intents = discord.Intents().default()
         intents.messages = True
         intents.message_content = True
         return intents
 
-    async def on_ready(self):
+    async def on_ready(self) -> None:
         print('We have logged in as {0.user}'.format(self))
 
-    async def on_message(self, message):
+    async def on_message(self, message: discord.Message) -> None:
         print(message.content)
         if message.author == self.user:
             return
         if message.content == '$test':
             await message.channel.send('Hello! I am a bot!')
 
-def main():
+def main() -> None:
     load_dotenv()
     client = SpoiledBot()
     client.run(os.getenv('TOKEN'))
