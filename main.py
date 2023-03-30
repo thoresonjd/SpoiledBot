@@ -6,8 +6,19 @@ Version: 1.0
 '''
 
 from dotenv import load_dotenv
+from enum import Enum
 import discord
 import os
+
+class Mode(Enum):
+    OFF = 'off'
+    SPOIL = 'spoil'
+    UNSPOIL = 'unspoil'
+    INVERT = 'invert'
+
+class Level(Enum):
+    NORMAL = 'normal'
+    AGONY = 'agony'
 
 class SpoiledBot(discord.Client):
     def __init__(self) -> None:
