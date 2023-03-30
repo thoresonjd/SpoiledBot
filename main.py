@@ -39,7 +39,7 @@ class SpoiledBot(discord.Client):
     async def on_message(self, message: discord.Message) -> None:
         if message.author == self.user:
             return
-        elif message.channel == self.get_channel(message.channel.id):
+        elif message.channel == self.get_channel(message.channel.id) and message.webhook_id == None:
             webhook = await message.channel.create_webhook(name='delete')
             await message.delete()
             await webhook.send(
