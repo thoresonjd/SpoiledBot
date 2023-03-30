@@ -37,13 +37,17 @@ class SpoiledBot(discord.Client):
         print('We have logged in as {0.user}'.format(self))
 
     async def on_message(self, message: discord.Message) -> None:
-        print(message.content)
         if message.author == self.user:
             return
-        if message.content == '$test':
-            await message.channel.send('Hello! I am a bot!')
-        else:
-            await message.channel.send(self.execute(message.content))
+        elif message.channel == self.get_channel(message.channel.id):
+            webhook = await message.channel.create_webhook(name='delete')
+            await message.delete()
+            await webhook.send(
+                content=self.execute(message.content),
+                username=message.author.display_name,
+                avatar_url=message.author.avatar.url
+            )
+            await webhook.delete()
 
     def execute(self, message: str) -> str:
         match self.mode:
