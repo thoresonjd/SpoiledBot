@@ -12,7 +12,7 @@ import os
 import re
 
 class Mode(Enum):
-    '''Spoiled Bot spoil modes'''
+    '''Spoiled Bot spoiler modes'''
 
     OFF = 'off'
     SPOIL = 'spoil'
