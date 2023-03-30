@@ -23,6 +23,8 @@ class Level(Enum):
 class SpoiledBot(discord.Client):
     def __init__(self) -> None:
         super().__init__(intents=self.__load_intents())
+        self.mode = Mode.INVERT
+        self.level = Level.AGONY
 
     @staticmethod
     def __load_intents() -> discord.Intents:
