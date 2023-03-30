@@ -42,6 +42,8 @@ class SpoiledBot(discord.Client):
             return
         if message.content == '$test':
             await message.channel.send('Hello! I am a bot!')
+        else:
+            await message.channel.send(self.execute(message.content))
 
     def execute(self, message: str) -> str:
         match self.mode:
