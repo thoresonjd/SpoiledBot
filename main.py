@@ -85,9 +85,16 @@ class SpoiledBot(discord.Client):
         for c in message:
             hidden = ''.join([hidden, '||', c, '||'])
         return hidden
-
-    def invert(message):
-        pass
+    
+    def invert(self, message: str) -> str:
+        pattern = re.compile(r'\|{2}.*?\|{2}')
+        spoiled = [hidden[2:-2] for hidden in pattern.findall(message)]
+        marked = [self.hide(visible) for visible in pattern.split(message)]
+        result = [marked[0]]
+        for i in range(0, len(spoiled)):
+            result.append(spoiled[i])
+            result.append(marked[i + 1])
+        return ''.join(result)
 
 def main() -> None:
     load_dotenv()
