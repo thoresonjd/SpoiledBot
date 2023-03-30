@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 from enum import Enum
 import discord
 import os
+import re
 
 class Mode(Enum):
     OFF = 'off'
@@ -41,6 +42,26 @@ class SpoiledBot(discord.Client):
             return
         if message.content == '$test':
             await message.channel.send('Hello! I am a bot!')
+
+    def execute(self, message: str) -> str:
+        match self.mode:
+            case Mode.OFF:
+                return message
+            case Mode.SPOIL:
+                return self.spoil(message)
+            case Mode.UNSPOIL:
+                return self.unspoil(message)
+            case Mode.INVERT:
+                return self.invert(message)
+            
+    def spoil(message):
+        pass
+
+    def unspoil(message):
+        pass
+
+    def invert(message):
+        pass
 
 def main() -> None:
     load_dotenv()
