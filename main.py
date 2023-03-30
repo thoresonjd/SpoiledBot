@@ -54,8 +54,16 @@ class SpoiledBot(discord.Client):
             case Mode.INVERT:
                 return self.invert(message)
             
-    def spoil(message):
-        pass
+    @staticmethod
+    def spoil(message: str) -> str:
+        spoiled = message
+        pattern = re.compile(r'\|{2}.*?\|{2}')
+        while found := pattern.search(spoiled):
+            found = pattern.search(spoiled)
+            start, end = found.span()
+            section = found.group()[2:-2]
+            spoiled = ''.join([spoiled[:start], section, spoiled[end:]])
+        return spoiled
 
     def unspoil(message):
         pass
