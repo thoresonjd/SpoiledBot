@@ -19,3 +19,17 @@ Spoiled Bot has four modes:
 Spoiled bot will mark message content as spoiler depending on two levels of pain:
 * `NORMAl` - Marks the entire message as a spoiler 
 * `AGONY` - Marks each individual character in a message as a spoiler
+
+## **Example**
+
+When the mode is set to `INVERT`, and the level is set to `AGONY`, the original message:
+
+`Hello, ||world!||`
+
+![](./assets/example-before.png)
+
+becomes:
+
+`||H||||e||||l||||l||||o||||,|||| ||world!`
+
+![](./assets/example-after.png)
