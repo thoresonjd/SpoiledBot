@@ -30,7 +30,7 @@ class SpoiledBot(discord.Client):
 
     def __init__(self) -> None:
         super().__init__(intents=self.__load_intents())
-        self.mode = Mode.UNSPOIL
+        self.mode = Mode.OFF
         self.level = Level.NORMAL
 
     @staticmethod
