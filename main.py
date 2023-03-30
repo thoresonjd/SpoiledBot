@@ -65,8 +65,26 @@ class SpoiledBot(discord.Client):
             spoiled = ''.join([spoiled[:start], section, spoiled[end:]])
         return spoiled
 
-    def unspoil(message):
-        pass
+    def unspoil(self, msg):
+        return self.hide(msg.replace('||', ''))
+    
+    def hide(self, msg):
+        match self.level:
+            case Level.NORMAL:
+                return self.hide_message(msg)
+            case Level.AGONY:
+                return self.hide_each_character(msg)
+    
+    @staticmethod
+    def hide_message(message: str) -> str:
+        return ''.join(['||', message, '||']) if message else ''
+    
+    @staticmethod
+    def hide_each_character(message: str) -> str:
+        hidden = ''
+        for c in message:
+            hidden = ''.join([hidden, '||', c, '||'])
+        return hidden
 
     def invert(message):
         pass
