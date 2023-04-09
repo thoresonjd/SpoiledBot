@@ -88,7 +88,6 @@ class SpoiledBot(discord.Client):
         spoiled = message
         pattern = re.compile(r'\|{2}.*?\|{2}')
         while found := pattern.search(spoiled):
-            found = pattern.search(spoiled)
             start, end = found.span()
             section = found.group()[2:-2]
             spoiled = ''.join([spoiled[:start], section, spoiled[end:]])
